@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezolvări Bacalaureat - 10labac</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="pdf-database.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>10labac</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Acasă</a></li>
+                    <li><a href="index.html#profiles" class="nav-link">Profile</a></li>
+                    <li><a href="index.html#years" class="nav-link">Ani</a></li>
+                    <li><a href="index.html#about" class="nav-link">Despre</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </button>
+                                            <div class="nav-toggle">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Solutions Content -->
+    <main class="solutions-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Acasă</a> 
+                <i class="fas fa-chevron-right"></i>
+                <span id="profile-breadcrumb">Profile</span>
+                <i class="fas fa-chevron-right"></i>
+                <span id="year-breadcrumb">Ani</span>
+            </div>
+
+            <div class="solutions-header">
+                <div class="header-content">
+                    <div class="profile-info">
+                        <div class="profile-icon-large" id="profile-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="profile-details">
+                            <h1 id="profile-title">Rezolvări Matematică</h1>
+                            <p id="profile-subtitle">Bacalaureat România</p>
+                            <div class="profile-meta">
+                                <span class="meta-tag" id="year-tag">Anul 2024</span>
+                                <span class="meta-tag" id="profile-tag">Profil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solutions-content">
+                <!-- Session Info Display -->
+                <div class="session-info-display" id="session-info" style="display: none;">
+                    <div class="session-badge">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="session-name">Sesiunea I</span>
+                    </div>
+                </div>
+
+                <!-- PDF Documents Section -->
+                <div class="pdf-documents-section">
+                    <div class="section-header">
+                        <h3>
+                            <i class="fas fa-file-pdf"></i>
+                            Documente disponibile
+                        </h3>
+                        <p>Rezolvări și materiale pentru această combinație de profil, an și sesiune</p>
+                    </div>
+
+                    <div class="pdf-grid" id="pdf-grid">
+                        <!-- PDF items will be populated here -->
+                        <div class="no-pdfs-message">
+                            <div class="no-pdfs-icon">
+                                <i class="fas fa-inbox"></i>
+                            </div>
+                            <h4>Nu sunt documente disponibile încă</h4>
+                            <p>Documentele pentru această secțiune sunt în curs de pregătire și vor fi adăugate în curând.</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Navigation Section -->
+                <div class="navigation-section">
+                    <div class="nav-buttons">
+                        <a href="index.html" class="btn btn-secondary">
+                            <i class="fas fa-home"></i>
+                            Acasă
+                        </a>
+                        <button class="btn btn-outline" onclick="history.back()">
+                            <i class="fas fa-arrow-left"></i>
+                            Înapoi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const profile = urlParams.get('profile');
+        const year = urlParams.get('year');
+        const session = urlParams.get('session');
+        const type = urlParams.get('type');
+
+        // Profile data
+        const profiles = {
+            'stiinte-naturii': {
+                name: 'Științele Naturii',
+                icon: 'fas fa-microscope'
+            },
+            'matematica-informatica': {
+                name: 'Matematică-Informatică',
+                icon: 'fas fa-laptop-code'
+            },
+            'tehnologic': {
+                name: 'Tehnologic',
+                icon: 'fas fa-cogs'
+            },
+            'pedagogic': {
+                name: 'Pedagogic',
+                icon: 'fas fa-chalkboard-teacher'
+            }
+        };
+
+        // Session names
+        const sessionNames = {
+            'sesiunea1': 'Sesiunea I (Iunie)',
+            'sesiunea2': 'Sesiunea a II-a (Septembrie)',
+            'speciala': 'Sesiunea Specială',
+            'simulare': 'Simulare Națională',
+            'model': 'Model Oficial MEN'
+        };
+
+        // Import PDF database - this will be loaded from pdf-database.js
+
+        // Generate unique key for current combination
+        function generateKey() {
+            let key = `${profile}_${year}`;
+            if (session) key += `_${session}`;
+            if (type) key += `_${type}`;
+            return key;
+        }
+
+        // Update page content based on URL parameters
+        function initializePage() {
+            if (profile && year && profiles[profile]) {
+                const profileData = profiles[profile];
+                
+                // Update breadcrumb
+                document.getElementById('profile-breadcrumb').textContent = profileData.name;
+                document.getElementById('year-breadcrumb').textContent = year;
+                
+                // Update header
+                document.getElementById('profile-icon').innerHTML = `<i class="${profileData.icon}"></i>`;
+                document.getElementById('profile-title').textContent = `${profileData.name} - Matematică`;
+                
+                let subtitle = `Rezolvări Bacalaureat ${year}`;
+                if (session && sessionNames[session]) {
+                    subtitle += ` - ${sessionNames[session]}`;
+                    // Show session info
+                    document.getElementById('session-info').style.display = 'block';
+                    document.getElementById('session-name').textContent = sessionNames[session];
+                } else if (type && sessionNames[type]) {
+                    subtitle += ` - ${sessionNames[type]}`;
+                    document.getElementById('session-info').style.display = 'block';
+                    document.getElementById('session-name').textContent = sessionNames[type];
+                }
+                
+                document.getElementById('profile-subtitle').textContent = subtitle;
+                document.getElementById('year-tag').textContent = `Anul ${year}`;
+                document.getElementById('profile-tag').textContent = profileData.name;
+                
+                // Update page title
+                let pageTitle = `${profileData.name} ${year}`;
+                if (session) pageTitle += ` ${sessionNames[session]}`;
+                if (type) pageTitle += ` ${sessionNames[type]}`;
+                pageTitle += ' - 10labac';
+                document.title = pageTitle;
+
+                // Load PDFs for this combination
+                loadPDFs();
+            }
+        }
+
+        // Load PDFs for current combination
+        function loadPDFs() {
+            // Use PDFManager if available, otherwise fallback to empty
+            const pdfs = (typeof PDFManager !== 'undefined') ? 
+                PDFManager.getPDFs(profile, year, session, type) : [];
+            
+            const pdfGrid = document.getElementById('pdf-grid');
+            
+            // Check if we have real PDFs (not placeholders) or no PDFs at all
+            const realPdfs = pdfs.filter(pdf => !pdf.isPlaceholder);
+            const placeholders = pdfs.filter(pdf => pdf.isPlaceholder);
+            
+            if (realPdfs.length === 0 && placeholders.length === 0) {
+                // Show no PDFs message (already in HTML)
+                return;
+            }
+            
+            if (realPdfs.length === 0 && placeholders.length > 0) {
+                // Show placeholder message
+                pdfGrid.innerHTML = `
+                    <div class="no-pdfs-message">
+                        <div class="no-pdfs-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Documentele sunt în pregătire</h4>
+                        <p>Rezolvările pentru ${profiles[profile].name} ${year} ${session ? sessionNames[session] : ''} sunt în curs de pregătire și vor fi disponibile în curând. Verificați din nou pentru actualizări!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Clear existing content and populate with actual PDFs
+            pdfGrid.innerHTML = realPdfs.map(pdf => `
+                <div class="pdf-item" data-pdf-id="${pdf.id}">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-info">
+                        <h5>${pdf.title}</h5>
+                        <p>${pdf.description}</p>
+                        <div class="pdf-meta">
+                            <span><i class="fas fa-calendar"></i> ${pdf.date}</span>
+                            <span><i class="fas fa-file-download"></i> ${pdf.size}</span>
+                        </div>
+                    </div>
+                    <div class="pdf-actions">
+                        <a href="${pdf.url}" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-eye"></i>
+                            Vezi
+                        </a>
+                        <a href="${pdf.url}" class="btn btn-outline" download>
+                            <i class="fas fa-download"></i>
+                            Descarcă
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+            
+            // If there are placeholders along with real PDFs, show a notice
+            if (placeholders.length > 0) {
+                pdfGrid.innerHTML += `
+                    <div class="placeholder-notice">
+                        <div class="notice-content">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Documentele suplimentare pentru această secțiune vor fi adăugate în curând.</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+
+
+
+
+        // Dark Mode Functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Add smooth transition for theme change
+            html.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                html.style.transition = '';
+            }, 300);
+        }
+
+        // Initialize theme from localStorage or system preference
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let theme = 'light';
+            
+            if (savedTheme) {
+                theme = savedTheme;
+            } else if (systemPrefersDark) {
+                theme = 'dark';
+            }
+            
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            initializePage();
+        });
+
+        // No global functions needed anymore
+    </script>
+</body>
+</html>

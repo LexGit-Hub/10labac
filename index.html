@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10labac - Rezolvări Bacalaureat România</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>10labac</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Acasă</a></li>
+                    <li><a href="#profiles" class="nav-link">Profile</a></li>
+                    <li><a href="#years" class="nav-link">Ani</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </button>
+                                            <div class="nav-toggle">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Rezolvări Complete
+                    <span class="gradient-text">Bacalaureat România</span>
+                </h1>
+                <p class="hero-description">
+                    Găsește rezolvări complete și detaliate pentru matematică la bacalaureat din anii anteriori. 
+                    Toate profilurile educaționale (Științe, Mate-Info, Tehnologic, Pedagogic) cu explicații pas cu pas.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToProfiles()">
+                        <i class="fas fa-search"></i>
+                        Explorează Rezolvările
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToYears()">
+                        <i class="fas fa-calendar-alt"></i>
+                        Vezi Anii Anteriori
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">300+</span>
+                        <span class="stat-label">Probleme Matematică</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">16+</span>
+                        <span class="stat-label">Ani de Examene</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Profile Educaționale</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <i class="fas fa-microscope"></i>
+                    <span>Științele Naturii</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Mate-Info</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-cogs"></i>
+                    <span>Tehnologic</span>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Pedagogic</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profiles Section -->
+    <section id="profiles" class="profiles">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Profile Educaționale</h2>
+                <p class="section-subtitle">Alege profilul tău și găsește toate rezolvările de care ai nevoie</p>
+            </div>
+            <div class="profiles-grid">
+                <div class="profile-card" data-profile="stiinte-naturii">
+                    <div class="profile-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="profile-title">Științele Naturii</h3>
+                    <p class="profile-description">Matematică pentru profilul real - științe</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-arrow-right"></i>
+                        Vezi Rezolvări
+                    </button>
+                </div>
+
+                <div class="profile-card" data-profile="matematica-informatica">
+                    <div class="profile-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="profile-title">Matematică-Informatică</h3>
+                    <p class="profile-description">Matematică intensivă pentru real</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-arrow-right"></i>
+                        Vezi Rezolvări
+                    </button>
+                </div>
+
+                <div class="profile-card" data-profile="tehnologic">
+                    <div class="profile-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="profile-title">Tehnologic</h3>
+                    <p class="profile-description">Matematică aplicată pentru tehnologie</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-arrow-right"></i>
+                        Vezi Rezolvări
+                    </button>
+                </div>
+
+                <div class="profile-card" data-profile="pedagogic">
+                    <div class="profile-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="profile-title">Pedagogic</h3>
+                    <p class="profile-description">Matematică pentru viitori profesori</p>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-arrow-right"></i>
+                        Vezi Rezolvări
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Years Section -->
+    <section id="years" class="years">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ani de Examen</h2>
+                <p class="section-subtitle">Selectează anul pentru care vrei să vezi rezolvările</p>
+            </div>
+            <div class="years-filter">
+                <button class="filter-btn active" data-filter="all">Toți Anii</button>
+                <button class="filter-btn" data-filter="recent">2020-2025</button>
+                <button class="filter-btn" data-filter="older">2015-2019</button>
+                <button class="filter-btn" data-filter="archive">2010-2014</button>
+            </div>
+            <div class="years-grid" id="years-grid">
+                <!-- Years will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Modal -->
+    <div id="solutions-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Rezolvări</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
