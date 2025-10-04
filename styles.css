@@ -187,7 +187,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link {
     text-decoration: none;
-    color: var(--text-primary);
+    color: #111827;
     font-weight: 500;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -1123,6 +1123,17 @@ section {
     flex-wrap: wrap;
 }
 
+.nav-buttons .btn-secondary {
+    background: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+}
+
+.nav-buttons .btn-secondary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
 /* Navigation Actions */
 .nav-actions {
     display: flex;
@@ -1200,6 +1211,10 @@ section {
     border-color: var(--border-color);
 }
 
+[data-theme="dark"] .nav-link {
+    color: #f9fafb;
+}
+
 [data-theme="dark"] .btn-secondary {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
@@ -1208,6 +1223,17 @@ section {
 [data-theme="dark"] .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .nav-buttons .btn-secondary {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .nav-buttons .btn-secondary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
 }
 
 /* Dark Mode Modal Elements */

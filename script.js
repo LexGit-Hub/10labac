@@ -93,16 +93,10 @@ function setupNavigation() {
         });
     });
 
-    // Header scroll effect
+    // Header scroll effect with theme support
     window.addEventListener('scroll', () => {
-        const header = document.querySelector('.header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(255, 255, 255, 0.98)';
-            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            header.style.background = 'rgba(255, 255, 255, 0.95)';
-            header.style.boxShadow = 'none';
-        }
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        updateHeaderForTheme(currentTheme);
     });
 }
 
@@ -527,11 +521,41 @@ function toggleTheme() {
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     
+    // Update header styling immediately to match new theme
+    updateHeaderForTheme(newTheme);
+    
     // Add smooth transition for theme change
     html.style.transition = 'all 0.3s ease';
     setTimeout(() => {
         html.style.transition = '';
     }, 300);
+}
+
+// Update header styling based on theme and scroll position
+function updateHeaderForTheme(theme) {
+    const header = document.querySelector('.header');
+    if (!header) return;
+    
+    const isDark = theme === 'dark';
+    const isScrolled = window.scrollY > 100;
+    
+    if (isScrolled) {
+        if (isDark) {
+            header.style.background = 'rgba(17, 24, 39, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        }
+    } else {
+        if (isDark) {
+            header.style.background = 'rgba(17, 24, 39, 0.95)';
+            header.style.boxShadow = 'none';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    }
 }
 
 // Initialize theme from localStorage or system preference
