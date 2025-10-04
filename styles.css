@@ -1206,6 +1206,10 @@ section {
     background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
 }
 
+[data-theme="dark"] .hero-title {
+    color: #f9fafb;
+}
+
 [data-theme="dark"] .header {
     background: rgba(17, 24, 39, 0.95);
     border-color: var(--border-color);
