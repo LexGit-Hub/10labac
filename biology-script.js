@@ -350,7 +350,13 @@ function scrollToTopics() {
 }
 
 function scrollToYears() {
-    document.getElementById('years').scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('years');
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
+    // fallback: navigate to dedicated years page for biology
+    window.location.href = 'years.html?subject=biology';
 }
 
 // Scroll animations
