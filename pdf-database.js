@@ -428,3 +428,21 @@ const PDFManager = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { pdfDatabase, PDFManager };
 }
+
+// If an auto-generated database exists (pdf-database.auto.js defines `pdfDatabaseAuto`),
+// merge its entries so any PDF placed under `/pdfs/` is shown regardless of filename.
+try {
+    if (typeof pdfDatabaseAuto !== 'undefined' && pdfDatabaseAuto) {
+        for (const [key, entries] of Object.entries(pdfDatabaseAuto)) {
+            if (!pdfDatabase[key]) pdfDatabase[key] = [];
+            // Remove placeholders
+            pdfDatabase[key] = pdfDatabase[key].filter(p => !p.isPlaceholder);
+            const existing = new Set(pdfDatabase[key].map(p => p.url));
+            for (const e of entries) {
+                if (!existing.has(e.url)) pdfDatabase[key].push(e);
+            }
+        }
+    }
+} catch (e) {
+    // pdfDatabaseAuto not defined in this environment — ignore
+}
