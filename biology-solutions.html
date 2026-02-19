@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezolvări Bacalaureat - Bac Rezolvat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="pdf-database.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Bac Rezolvat</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Acasă</a></li>
+                    <li><a href="index.html#topics" class="nav-link">Discipline</a></li>
+                    <li><a href="index.html#years" class="nav-link">Ani</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </button>
+                                            <div class="nav-toggle">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Solutions Content -->
+    <main class="solutions-page">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Acasă</a> 
+                <i class="fas fa-chevron-right"></i>
+                <span id="topic-breadcrumb">Discipline</span>
+                <i class="fas fa-chevron-right"></i>
+                <span id="year-breadcrumb">Ani</span>
+            </div>
+
+            <div class="solutions-header">
+                <div class="header-content">
+                    <div class="profile-info">
+                        <div class="profile-icon-large" id="topic-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="profile-details">
+                            <h1 id="topic-title">Rezolvări Biologie</h1>
+                            <p id="topic-subtitle">Bacalaureat România</p>
+                            <div class="profile-meta">
+                                <span class="meta-tag" id="year-tag">Anul 2024</span>
+                                <span class="meta-tag" id="topic-tag">Disciplina</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solutions-content">
+                <!-- Session Info Display -->
+                <div class="session-info-display" id="session-info" style="display: none;">
+                    <div class="session-badge">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="session-name">Sesiunea I</span>
+                    </div>
+                </div>
+
+                <!-- PDF Documents Section -->
+                <div class="pdf-documents-section">
+                    <div class="section-header">
+                        <h3>
+                            <i class="fas fa-file-pdf"></i>
+                            Documente disponibile
+                        </h3>
+                        <p>Rezolvări și materiale pentru această combinație de disciplină, an și sesiune</p>
+                    </div>
+
+                    <div class="pdf-grid" id="pdf-grid">
+                        <!-- PDF items will be populated here -->
+                        <div class="no-pdfs-message">
+                            <div class="no-pdfs-icon">
+                                <i class="fas fa-inbox"></i>
+                            </div>
+                            <h4>Nu sunt documente disponibile încă</h4>
+                            <p>Documentele pentru această secțiune sunt în curs de pregătire și vor fi adăugate în curând.</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Navigation Section -->
+                <div class="navigation-section">
+                    <div class="nav-buttons">
+                        <a href="index.html" class="btn btn-secondary">
+                            <i class="fas fa-home"></i>
+                            Acasă
+                        </a>
+                        <a href="biology.html" class="btn btn-secondary">
+                            <i class="fas fa-book"></i>
+                            Biologie
+                        </a>
+                        <button class="btn btn-outline" onclick="history.back()">
+                            <i class="fas fa-arrow-left"></i>
+                            Înapoi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const topic = urlParams.get('topic');
+        const year = urlParams.get('year');
+        const session = urlParams.get('session');
+        const type = urlParams.get('type');
+
+        // Topic data
+        const topics = {
+            'anatomie': {
+                name: 'Anatomie',
+                icon: 'fas fa-heart'
+            }
+        };
+
+        // Session names
+        const sessionNames = {
+            'sesiunea1': 'Sesiunea I (Iunie)',
+            'sesiunea2': 'Sesiunea a II-a (Septembrie)', 
+            'simulare': 'Simulare Națională',
+            'model': 'Model Oficial MEN'
+        };
+
+        // Import PDF database - this will be loaded from pdf-database.js
+
+        // Generate unique key for current combination
+        function generateKey() {
+            let key = `biologie_${topic}_${year}`;
+            if (session) key += `_${session}`;
+            if (type) key += `_${type}`;
+            return key;
+        }
+
+        // Update page content based on URL parameters
+        function initializePage() {
+            if (topic && year && topics[topic]) {
+                const topicData = topics[topic];
+                
+                // Update breadcrumb
+                document.getElementById('topic-breadcrumb').textContent = topicData.name;
+                document.getElementById('year-breadcrumb').textContent = year;
+                
+                // Update header
+                document.getElementById('topic-icon').innerHTML = `<i class="${topicData.icon}"></i>`;
+                document.getElementById('topic-title').textContent = `${topicData.name} - Biologie`;
+                
+                let subtitle = `Rezolvări Bacalaureat ${year}`;
+                if (session && sessionNames[session]) {
+                    subtitle += ` - ${sessionNames[session]}`;
+                    // Show session info
+                    document.getElementById('session-info').style.display = 'block';
+                    document.getElementById('session-name').textContent = sessionNames[session];
+                } else if (type && sessionNames[type]) {
+                    subtitle += ` - ${sessionNames[type]}`;
+                    document.getElementById('session-info').style.display = 'block';
+                    document.getElementById('session-name').textContent = sessionNames[type];
+                }
+                
+                document.getElementById('topic-subtitle').textContent = subtitle;
+                document.getElementById('year-tag').textContent = `Anul ${year}`;
+                document.getElementById('topic-tag').textContent = topicData.name;
+                
+                // Update page title
+                let pageTitle = `${topicData.name} ${year}`;
+                if (session) pageTitle += ` ${sessionNames[session]}`;
+                if (type) pageTitle += ` ${sessionNames[type]}`;
+                pageTitle += ' - 10labac';
+                document.title = pageTitle;
+
+                // Load PDFs for this combination
+                loadPDFs();
+            }
+        }
+
+        // Load PDFs for current combination
+        function loadPDFs() {
+            // Use PDFManager if available, otherwise fallback to empty
+            const pdfs = (typeof PDFManager !== 'undefined') ? 
+                PDFManager.getPDFs(`biologie_${topic}`, year, session, type) : [];
+            
+            const pdfGrid = document.getElementById('pdf-grid');
+            
+            // Check if we have real PDFs (not placeholders) or no PDFs at all
+            const realPdfs = pdfs.filter(pdf => !pdf.isPlaceholder);
+            const placeholders = pdfs.filter(pdf => pdf.isPlaceholder);
+            
+            if (realPdfs.length === 0 && placeholders.length === 0) {
+                // Show no PDFs message (already in HTML)
+                return;
+            }
+            
+            if (realPdfs.length === 0 && placeholders.length > 0) {
+                // Show placeholder message
+                pdfGrid.innerHTML = `
+                    <div class="no-pdfs-message">
+                        <div class="no-pdfs-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Documentele sunt în pregătire</h4>
+                        <p>Rezolvările pentru ${topics[topic].name} ${year} ${session ? sessionNames[session] : ''} sunt în curs de pregătire și vor fi disponibile în curând. Verificați din nou pentru actualizări!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Clear existing content and populate with actual PDFs
+            pdfGrid.innerHTML = realPdfs.map(pdf => `
+                <div class="pdf-item" data-pdf-id="${pdf.id}">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-info">
+                        <h5>${pdf.title}</h5>
+                        <p>${pdf.description}</p>
+                        <div class="pdf-meta">
+                            <span><i class="fas fa-calendar"></i> ${pdf.date}</span>
+                            <span><i class="fas fa-file-download"></i> ${pdf.size}</span>
+                        </div>
+                    </div>
+                    <div class="pdf-actions">
+                        <a href="${pdf.url}" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-eye"></i>
+                            Vezi
+                        </a>
+                        <a href="${pdf.url}" class="btn btn-outline" download>
+                            <i class="fas fa-download"></i>
+                            Descarcă
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+            
+            // If there are placeholders along with real PDFs, show a notice
+            if (placeholders.length > 0) {
+                pdfGrid.innerHTML += `
+                    <div class="placeholder-notice">
+                        <div class="notice-content">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Documentele suplimentare pentru această secțiune vor fi adăugate în curând.</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Dark Mode Functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Add smooth transition for theme change
+            html.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                html.style.transition = '';
+            }, 300);
+        }
+
+        // Initialize theme from localStorage or system preference
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let theme = 'light';
+            
+            if (savedTheme) {
+                theme = savedTheme;
+            } else if (systemPrefersDark) {
+                theme = 'dark';
+            }
+            
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            initializePage();
+        });
+    </script>
+</body>
+</html>
