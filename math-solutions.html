@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rezolvări Bacalaureat - Bac Rezolvat</title>
+    <title>Rezolvări Bacalaureat Matematică - 10labac</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html" class="nav-link">Acasă</a></li>
-                    <li><a href="index.html#profiles" class="nav-link">Profile</a></li>
+                    <li><a href="math.html" class="nav-link">Matematică</a></li>
                     <li><a href="index.html#years" class="nav-link">Ani</a></li>
                 </ul>
                 <div class="nav-actions">
@@ -43,6 +43,8 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.html">Acasă</a> 
+                <i class="fas fa-chevron-right"></i>
+                <a href="math.html">Matematică</a> 
                 <i class="fas fa-chevron-right"></i>
                 <span id="profile-breadcrumb">Profile</span>
                 <i class="fas fa-chevron-right"></i>
@@ -106,6 +108,10 @@
                         <a href="index.html" class="btn btn-secondary">
                             <i class="fas fa-home"></i>
                             Acasă
+                        </a>
+                        <a href="math.html" class="btn btn-secondary">
+                            <i class="fas fa-book"></i>
+                            Matematică
                         </a>
                         <button class="btn btn-outline" onclick="history.back()">
                             <i class="fas fa-arrow-left"></i>
@@ -277,10 +283,6 @@
                 `;
             }
         }
-
-
-
-
 
         // Dark Mode Functionality
         function toggleTheme() {

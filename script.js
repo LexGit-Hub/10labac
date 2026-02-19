@@ -5,6 +5,7 @@ let currentYear = null;
 // Sample data for demonstration - Mathematics only
 const examData = {
     years: [
+        { year: 2026, subjects: ['Matematică'] },
         { year: 2025, subjects: ['Matematică'] },
         { year: 2024, subjects: ['Matematică'] },
         { year: 2023, subjects: ['Matematică'] },
@@ -334,7 +335,7 @@ function showProfileYearSolutions(profile, year, sessionType = null) {
     const profileData = examData.profiles[profile];
     
     // Create URL for the solutions page
-    let solutionsUrl = `solutions.html?profile=${profile}&year=${year}`;
+    let solutionsUrl = `math-solutions.html?profile=${profile}&year=${year}`;
     if (sessionType) {
         solutionsUrl += `&session=${sessionType}`;
     }
@@ -388,7 +389,7 @@ function showProfileSessionSolutions(profile, sessionType) {
 
 // Redirect to solutions page with all parameters
 function redirectToSolutions(profile, year, sessionType) {
-    let solutionsUrl = `solutions.html?profile=${profile}&year=${year}`;
+    let solutionsUrl = `math-solutions.html?profile=${profile}&year=${year}`;
     if (sessionType === 'simulare' || sessionType === 'model') {
         solutionsUrl += `&type=${sessionType}`;
     } else {
