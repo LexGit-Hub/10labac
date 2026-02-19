@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesiuni - Bac Rezolvat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Bac Rezolvat</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Acasă</a></li>
+                <li><a href="years.html" class="nav-link">Ani</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun icon-sun"></i>
+                    <i class="fas fa-moon icon-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container" style="padding-top:100px">
+    <div class="section-header">
+        <h2 class="section-title">Alege Sesiunea</h2>
+        <p class="section-subtitle" id="subtitle">Selectează sesiunea pentru anul selectat</p>
+    </div>
+
+    <div class="session-selection">
+        <div class="session-buttons" id="sessions"></div>
+    </div>
+</main>
+
+<script>
+(function(){
+    const url = new URL(window.location.href);
+    const subject = url.searchParams.get('subject');
+    const profile = url.searchParams.get('profile');
+    const topic = url.searchParams.get('topic');
+    const year = url.searchParams.get('year');
+
+    const sessions = [
+        { id: 'sesiunea1', name: 'Sesiunea I (Iunie)' },
+        { id: 'sesiunea2', name: 'Sesiunea a II-a (Septembrie)' },
+        { id: 'model', name: 'Model Oficial MEN' },
+        { id: 'simulare', name: 'Simulare Națională' }
+    ];
+
+    document.getElementById('subtitle').textContent = `Sesiuni pentru anul ${year}`;
+
+    const container = document.getElementById('sessions');
+    sessions.forEach(s => {
+        const btn = document.createElement('a');
+        btn.className = 'session-btn';
+        let href = '';
+        if (subject === 'math') {
+            const params = new URLSearchParams();
+            params.set('profile', profile);
+            params.set('year', year);
+            params.set('session', s.id);
+            href = `math-solutions.html?${params.toString()}`;
+        } else if (subject === 'biology') {
+            const params = new URLSearchParams();
+            params.set('topic', topic);
+            params.set('year', year);
+            params.set('session', s.id);
+            href = `biology-solutions.html?${params.toString()}`;
+        } else {
+            // generic fallback to solutions.html
+            const params = new URLSearchParams();
+            if (profile) params.set('profile', profile);
+            if (topic) params.set('topic', topic);
+            params.set('year', year);
+            params.set('session', s.id);
+            href = `solutions.html?${params.toString()}`;
+        }
+
+        btn.href = href;
+        btn.innerHTML = `<i class="fas fa-calendar-alt"></i><div class="session-details"><div class="session-title">${s.name}</div><div class="session-subtitle">Deschide rezolvările pentru ${year}</div></div>`;
+        container.appendChild(btn);
+    });
+})();
+</script>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        html.style.transition = 'background-color 0.25s ease, color 0.25s ease';
+        setTimeout(() => html.style.transition = '', 300);
+    }
+
+    function initializeTheme() {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let theme = 'light';
+        if (saved) theme = saved;
+        else if (prefersDark) theme = 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeTheme);
+</script>
+
+</body>
+</html>

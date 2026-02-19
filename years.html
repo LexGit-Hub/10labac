@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ani - Bac Rezolvat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Bac Rezolvat</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Acasă</a></li>
+                <li><a href="years.html" class="nav-link">Ani</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun icon-sun"></i>
+                    <i class="fas fa-moon icon-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container" style="padding-top:100px">
+    <div class="section-header">
+        <h2 class="section-title">Ani de Examen</h2>
+        <p class="section-subtitle" id="subtitle">Alege anul pentru care vrei rezolvările</p>
+    </div>
+
+    <div class="years-grid" id="years-grid"></div>
+</main>
+
+<script>
+(function() {
+    const url = new URL(window.location.href);
+    const subject = url.searchParams.get('subject');
+    const profile = url.searchParams.get('profile');
+    const topic = url.searchParams.get('topic');
+
+    const titleMap = {
+        math: 'Matematică',
+        biology: 'Biologie'
+    };
+
+    const displayName = profile || topic || titleMap[subject] || 'Rezolvări';
+    document.getElementById('subtitle').textContent = `Selectează anul pentru ${displayName}`;
+
+    const years = [];
+    for (let y = 2026; y >= 2010; y--) years.push(y);
+
+    const grid = document.getElementById('years-grid');
+    years.forEach(y => {
+        const card = document.createElement('div');
+        card.className = 'year-card';
+        card.innerHTML = `
+            <div class="year-number">${y}</div>
+            <div class="year-subjects">${displayName}</div>
+        `;
+        card.addEventListener('click', () => {
+            const params = new URLSearchParams();
+            if (subject) params.set('subject', subject);
+            if (profile) params.set('profile', profile);
+            if (topic) params.set('topic', topic);
+            params.set('year', y);
+            window.location.href = `sessions.html?${params.toString()}`;
+        });
+        grid.appendChild(card);
+    });
+})();
+</script>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        html.style.transition = 'background-color 0.25s ease, color 0.25s ease';
+        setTimeout(() => html.style.transition = '', 300);
+    }
+
+    function initializeTheme() {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let theme = 'light';
+        if (saved) theme = saved;
+        else if (prefersDark) theme = 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeTheme);
+</script>
+
+</body>
+</html>

@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="page-math">
     <!-- Header -->
     <header class="header">
         <nav class="nav">
@@ -19,8 +19,7 @@
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html" class="nav-link">Acasă</a></li>
-                    <li><a href="#profiles" class="nav-link">Profile</a></li>
-                    <li><a href="#years" class="nav-link">Ani</a></li>
+                    <li><a href="years.html?subject=math" class="nav-link">Ani</a></li>
                 </ul>
                 <div class="nav-actions">
                     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
@@ -49,16 +48,7 @@
                     Găsește rezolvări complete și detaliate pentru matematică la bacalaureat din anii anteriori. 
                     Toate profilurile educaționale (Științe, Mate-Info, Tehnologic, Pedagogic) 
                 </p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="scrollToProfiles()">
-                        <i class="fas fa-search"></i>
-                        Explorează Rezolvările
-                    </button>
-                    <button class="btn btn-secondary" onclick="scrollToYears()">
-                        <i class="fas fa-calendar-alt"></i>
-                        Vezi Anii Anteriori
-                    </button>
-                </div>
+                <!-- Hero buttons removed for a more compact layout -->
                 <div class="hero-stats">
                     <div class="stat">
                         <span class="stat-number">300+</span>
@@ -100,78 +90,61 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Profile Educaționale</h2>
-                <p class="section-subtitle">Alege profilul tău și găsește toate rezolvările de care ai nevoie</p>
+                <p class="section-subtitle">Alege profilul tău și vezi anii disponibili</p>
             </div>
             <div class="profiles-grid">
-                <div class="profile-card" data-profile="stiinte-naturii">
+                <div class="profile-card">
                     <div class="profile-icon">
                         <i class="fas fa-microscope"></i>
                     </div>
                     <h3 class="profile-title">Științele Naturii</h3>
                     <p class="profile-description">Matematică pentru profilul real - științe</p>
-                    <button class="btn btn-outline">
+                    <a class="btn btn-outline" href="years.html?subject=math&profile=stiinte-naturii">
                         <i class="fas fa-arrow-right"></i>
-                        Vezi Rezolvări
-                    </button>
+                        Vezi Ani
+                    </a>
                 </div>
 
-                <div class="profile-card" data-profile="matematica-informatica">
+                <div class="profile-card">
                     <div class="profile-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h3 class="profile-title">Matematică-Informatică</h3>
                     <p class="profile-description">Matematică intensivă pentru real</p>
-                    <button class="btn btn-outline">
+                    <a class="btn btn-outline" href="years.html?subject=math&profile=matematica-informatica">
                         <i class="fas fa-arrow-right"></i>
-                        Vezi Rezolvări
-                    </button>
+                        Vezi Ani
+                    </a>
                 </div>
 
-                <div class="profile-card" data-profile="tehnologic">
+                <div class="profile-card">
                     <div class="profile-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="profile-title">Tehnologic</h3>
                     <p class="profile-description">Matematică aplicată pentru tehnologie</p>
-                    <button class="btn btn-outline">
+                    <a class="btn btn-outline" href="years.html?subject=math&profile=tehnologic">
                         <i class="fas fa-arrow-right"></i>
-                        Vezi Rezolvări
-                    </button>
+                        Vezi Ani
+                    </a>
                 </div>
 
-                <div class="profile-card" data-profile="pedagogic">
+                <div class="profile-card">
                     <div class="profile-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
                     <h3 class="profile-title">Pedagogic</h3>
                     <p class="profile-description">Matematică pentru viitori profesori</p>
-                    <button class="btn btn-outline">
+                    <a class="btn btn-outline" href="years.html?subject=math&profile=pedagogic">
                         <i class="fas fa-arrow-right"></i>
-                        Vezi Rezolvări
-                    </button>
+                        Vezi Ani
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Years Section -->
-    <section id="years" class="years">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Ani de Examen</h2>
-                <p class="section-subtitle">Selectează anul pentru care vrei să vezi rezolvările</p>
-            </div>
-            <div class="years-filter">
-                <button class="filter-btn active" data-filter="all">Toți Anii</button>
-                <button class="filter-btn" data-filter="recent">2020-2026</button>
-                <button class="filter-btn" data-filter="older">2015-2019</button>
-                <button class="filter-btn" data-filter="archive">2010-2014</button>
-            </div>
-            <div class="years-grid" id="years-grid">
-                <!-- Years will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
+    <!-- Years moved to dedicated years.html -->
 
     <!-- Solutions Modal -->
     <div id="solutions-modal" class="modal">

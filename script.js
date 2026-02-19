@@ -427,7 +427,22 @@ function scrollToProfiles() {
 }
 
 function scrollToYears() {
-    document.getElementById('years').scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('years');
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
+    // fallback: try to infer subject from pathname
+    const path = window.location.pathname;
+    if (path.includes('math')) {
+        window.location.href = 'years.html?subject=math';
+        return;
+    }
+    if (path.includes('biology')) {
+        window.location.href = 'years.html?subject=biology';
+        return;
+    }
+    window.location.href = 'years.html';
 }
 
 // Contact form setup

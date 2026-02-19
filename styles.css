@@ -237,13 +237,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     position: relative;
     overflow: hidden;
+    padding: 2rem 0;
 }
 
 .hero::before {
@@ -266,32 +267,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: center;
     position: relative;
     z-index: 100;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
+    margin-bottom: 1rem;
+    line-height: 1.15;
     color: #1f2937;
     z-index: 100;
     position: relative;
 }
 
 .hero-description {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
     color: #374151;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .hero-buttons {
@@ -323,20 +324,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-visual {
     position: relative;
-    height: 500px;
+    height: 280px;
 }
 
 .floating-card {
     position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    /* darker translucent card on light mode for better visibility */
+    background: rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.25rem;
     animation: floating 6s ease-in-out infinite;
 }
 
@@ -370,23 +372,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .floating-card i {
-    font-size: 2rem;
+    font-size: 1.4rem;
     color: var(--secondary-color);
 }
 
 .floating-card span {
     font-weight: 500;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
 }
 
 /* Sections */
 section {
-    padding: 5rem 0;
+    padding: 3rem 0;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .section-title {
@@ -795,6 +797,7 @@ section {
 .footer-section ul li a:hover {
     color: var(--secondary-color);
 }
+.social-links {
     display: flex;
     gap: 1rem;
 }
@@ -2437,8 +2440,10 @@ textarea:focus,
 }
 
 [data-theme="dark"] .floating-card {
-    background: rgba(31, 41, 55, 0.2);
-    border: 1px solid rgba(107, 114, 128, 0.3);
+    /* much darker card in dark mode */
+    background: rgba(2, 6, 23, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
 }
 
 [data-theme="dark"] .floating-card span {
@@ -2485,4 +2490,46 @@ textarea:focus,
 
 [data-theme="dark"] .breadcrumb i {
     color: var(--text-light);
+}
+
+/* Page-specific single-color backgrounds and matching hero/profiles */
+body.page-math {
+    background: #eef2ff; /* light indigo */
+}
+body.page-math .hero,
+body.page-math .profiles {
+    background: #eef2ff;
+}
+
+body.page-bio {
+    background: #f0fff4; /* light green */
+}
+body.page-bio .hero,
+body.page-bio .profiles {
+    background: #f0fff4;
+}
+
+/* Ensure hero visuals don't add extra contrasting overlays on these pages */
+body.page-math .hero::before,
+body.page-bio .hero::before {
+    display: none;
+}
+
+/* Keep hero text readable */
+body.page-math .hero-title,
+body.page-bio .hero-title {
+    color: var(--text-primary);
+}
+
+/* Dark mode: make page backgrounds dark for math/bio pages */
+[data-theme="dark"] body.page-math,
+[data-theme="dark"] body.page-math .hero,
+[data-theme="dark"] body.page-math .profiles {
+    background: var(--bg-dark);
+}
+
+[data-theme="dark"] body.page-bio,
+[data-theme="dark"] body.page-bio .hero,
+[data-theme="dark"] body.page-bio .profiles {
+    background: var(--bg-dark);
 }
