@@ -1,0 +1,8 @@
+Placeholder pentru stiinte-naturii - 2019 - model
+
+Acest director va conține documentele PDF pentru:
+- Profil: stiinte-naturii
+- An: 2019
+- Sesiune: model
+
+Documentele vor fi adăugate în curând.
