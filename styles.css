@@ -870,6 +870,8 @@ section {
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: left;
+    text-decoration: none;
+    color: inherit;
 }
 
 .session-btn:hover {
@@ -2121,6 +2123,34 @@ textarea:focus,
         gap: 0.5rem;
     }
     
+    /* Mobile header / nav tweaks */
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-container {
+        height: 60px;
+    }
+
+    /* Make hero and other multi-column layouts single column on phones */
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .about-content,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Ensure main content isn't hidden behind fixed header on small screens */
+    main.container {
+        padding-top: 90px;
+    }
     .theme-toggle {
         width: 35px;
         height: 35px;
@@ -2243,14 +2273,15 @@ textarea:focus,
 }
 
 .subject-card {
-    background: var(--bg-secondary);
+    background: white;
     border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 2px solid transparent;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
     position: relative;
+    min-height: 220px;
 }
 
 .subject-card::before {
@@ -2282,6 +2313,9 @@ textarea:focus,
     background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     text-align: center;
     overflow: hidden;
+    /* subtle elevation to help visuals stand out against page background */
+    background-blend-mode: overlay;
+    backdrop-filter: blur(4px);
 }
 
 .subject-card-visual::before {
@@ -2412,6 +2446,21 @@ textarea:focus,
     }
 }
 
+/* Dark-mode adjustments for subject cards */
+[data-theme="dark"] .subject-card {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+[data-theme="dark"] .subject-card-visual {
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+}
+
+[data-theme="dark"] .subject-card:hover {
+    box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+}
+
 @media (max-width: 480px) {
     .selector-title {
         font-size: 2rem;
@@ -2496,40 +2545,32 @@ textarea:focus,
 body.page-math {
     background: #eef2ff; /* light indigo */
 }
-body.page-math .hero,
-body.page-math .profiles {
-    background: #eef2ff;
+/* Pages previously had subject-specific backgrounds (math/bio).
+   Use the site's default background so all pages look consistent. */
+body.page-math,
+body.page-bio {
+    background: transparent; /* inherit body background */
 }
 
-body.page-bio {
-    background: #f0fff4; /* light green */
-}
+body.page-math .hero,
+body.page-math .profiles,
 body.page-bio .hero,
 body.page-bio .profiles {
-    background: #f0fff4;
+    background: transparent;
 }
 
-/* Ensure hero visuals don't add extra contrasting overlays on these pages */
-body.page-math .hero::before,
-body.page-bio .hero::before {
-    display: none;
-}
-
-/* Keep hero text readable */
+/* Keep hero visuals optional but ensure text remains readable */
 body.page-math .hero-title,
 body.page-bio .hero-title {
     color: var(--text-primary);
 }
 
-/* Dark mode: make page backgrounds dark for math/bio pages */
+/* Dark mode: inherit dark theme background variables for consistency */
 [data-theme="dark"] body.page-math,
 [data-theme="dark"] body.page-math .hero,
-[data-theme="dark"] body.page-math .profiles {
-    background: var(--bg-dark);
-}
-
+[data-theme="dark"] body.page-math .profiles,
 [data-theme="dark"] body.page-bio,
 [data-theme="dark"] body.page-bio .hero,
 [data-theme="dark"] body.page-bio .profiles {
-    background: var(--bg-dark);
+    background: var(--bg-primary);
 }
