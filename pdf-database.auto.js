@@ -22,5 +22,29 @@ var pdfDatabaseAuto = {
       "category": "sesiunea2",
       "isPlaceholder": false
     }
+  ],
+  "matematica-informatica_2024_simulare": [
+    {
+      "id": "matematica-informatica_2024_simulare_matematica-informatica_2024_simulare",
+      "title": "matematica informatica 2024 simulare",
+      "description": "Auto-detected PDF: matematica-informatica_2024_simulare.pdf",
+      "url": "pdfs/matematica-informatica/2024/simulare/matematica-informatica_2024_simulare.pdf",
+      "date": ".",
+      "size": "8.39 MB",
+      "category": "simulare",
+      "isPlaceholder": false
+    }
+  ],
+  "matematica-informatica_2015_sesiunea2": [
+    {
+      "id": "matematica-informatica_2015_sesiunea2_matematica-informatica_2015_sesiunea2",
+      "title": "matematica informatica 2015 sesiunea2",
+      "description": "Auto-detected PDF: matematica-informatica_2015_sesiunea2.pdf",
+      "url": "pdfs/matematica-informatica/2015/sesiunea2/matematica-informatica_2015_sesiunea2.pdf",
+      "date": ".",
+      "size": "5.15 MB",
+      "category": "sesiunea2",
+      "isPlaceholder": false
+    }
   ]
 };

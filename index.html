@@ -738,24 +738,78 @@ function getPDFs(profile, year, session) {
 ════════════════════════════════════════ */
 const S = { view:'home', subject:null, profile:null, year:null, session:null };
 
-function route(view, arg) {
-  if      (view==='home')      Object.assign(S,{view,subject:null,profile:null,year:null,session:null});
-  else if (view==='profiles')  Object.assign(S,{view,subject:arg,profile:null,year:null,session:null});
-  else if (view==='years')     Object.assign(S,{view,profile:arg,year:null,session:null});
-  else if (view==='sessions')  Object.assign(S,{view,year:arg,session:null});
-  else if (view==='solutions') Object.assign(S,{view,session:arg});
-  render();
-  window.scrollTo({top:0, behavior:'instant'});
+function getStateURL(state = S) {
+  if (state.view === 'home') return '#/';
+  if (state.view === 'profiles') return `#/profiles/${state.subject || 'math'}`;
+  if (state.view === 'years') return `#/years/${state.profile || ''}`;
+  if (state.view === 'sessions') return `#/sessions/${state.year || ''}?profile=${state.profile || ''}&subject=${state.subject || ''}`;
+  if (state.view === 'solutions') return `#/solutions/${state.year || ''}/${state.session || ''}?profile=${state.profile || ''}&subject=${state.subject || ''}`;
+  return '#/';
 }
 
-/* ════════════════════════════════════════
-   RENDER
-════════════════════════════════════════ */
+function parseStateFromHash() {
+  const hash = window.location.hash.slice(1).replace(/\/+$/, '');
+  if (!hash) return { view:'home', subject:null, profile:null, year:null, session:null };
+  const [path, queryString] = hash.split('?');
+  const parts = path.split('/').filter(Boolean);
+  const query = {};
+  if (queryString) {
+    new URLSearchParams(queryString).forEach((value, key) => query[key] = value);
+  }
+
+  if (parts[0] === 'profiles') {
+    return { view:'profiles', subject:parts[1] || 'math', profile:null, year:null, session:null };
+  }
+  if (parts[0] === 'years') {
+    return { view:'years', subject:null, profile:parts[1] || null, year:null, session:null };
+  }
+  if (parts[0] === 'sessions') {
+    return { view:'sessions', subject:query.subject || null, profile:query.profile || null, year:Number(parts[1]) || null, session:null };
+  }
+  if (parts[0] === 'solutions') {
+    return { view:'solutions', subject:query.subject || null, profile:query.profile || null, year:Number(parts[1]) || null, session:parts[2] || null };
+  }
+  return { view:'home', subject:null, profile:null, year:null, session:null };
+}
+
+function setState(state, replace = false) {
+  Object.assign(S, state);
+  render();
+  const url = getStateURL(state);
+  if (replace) window.history.replaceState(state, '', url);
+  else window.history.pushState(state, '', url);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function route(view, arg, replace = false) {
+  if      (view === 'home')      Object.assign(S, { view, subject:null, profile:null, year:null, session:null });
+  else if (view === 'profiles')  Object.assign(S, { view, subject:arg, profile:null, year:null, session:null });
+  else if (view === 'years')     Object.assign(S, { view, profile:arg, year:null, session:null });
+  else if (view === 'sessions')  Object.assign(S, { view, year:arg, session:null });
+  else if (view === 'solutions') Object.assign(S, { view, session:arg });
+
+  const state = { ...S };
+  render();
+  const url = getStateURL(state);
+  if (replace) window.history.replaceState(state, '', url);
+  else window.history.pushState(state, '', url);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('popstate', event => {
+  const state = event.state || parseStateFromHash();
+  if (state) {
+    Object.assign(S, state);
+    render();
+  }
+});
+
 function render() {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(`view-${S.view}`).classList.add('active');
+  const target = document.getElementById(`view-${S.view}`) || document.getElementById('view-home');
+  target.classList.add('active');
   renderBC();
-  const fn = {profiles:renderProfiles, years:renderYears, sessions:renderSessions, solutions:renderSolutions};
+  const fn = { profiles: renderProfiles, years: renderYears, sessions: renderSessions, solutions: renderSolutions };
   if (fn[S.view]) fn[S.view]();
 }
 
@@ -921,7 +975,8 @@ function initTheme() {
 ════════════════════════════════════════ */
 initTheme();
 mergePDFDatabase();
-render();
+const initialState = window.history.state || parseStateFromHash();
+setState(initialState, true);
 </script>
 
 <!-- Load your PDF databases — keep these exactly as before -->
