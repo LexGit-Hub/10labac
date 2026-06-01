@@ -12,7 +12,7 @@ def walk_pdfs(root: Path):
         yield p
 
 def to_url(p: Path):
-    return '/' + p.relative_to(ROOT).as_posix()
+    return p.relative_to(ROOT).as_posix()
 
 def make_key(parts):
     # parts: ['pdfs','profile','year','session',...]
