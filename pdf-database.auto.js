@@ -11,15 +11,51 @@ var pdfDatabaseAuto = {
       "isPlaceholder": false
     }
   ],
+  "stiinte-naturii_2015_model": [
+    {
+      "id": "stiinte-naturii_2015_model_stiintele_naturii 2015 model",
+      "title": "stiintele naturii 2015 model",
+      "description": "Auto-detected PDF: stiintele_naturii 2015 model.pdf",
+      "url": "pdfs/stiinte-naturii/2015/model/stiintele_naturii 2015 model.pdf",
+      "date": ".",
+      "size": "6.18 MB",
+      "category": "model",
+      "isPlaceholder": false
+    }
+  ],
+  "stiinte-naturii_2015_sesiunea1": [
+    {
+      "id": "stiinte-naturii_2015_sesiunea1_stiintele_naturii 2015 sesiunea 1",
+      "title": "stiintele naturii 2015 sesiunea 1",
+      "description": "Auto-detected PDF: stiintele_naturii 2015 sesiunea 1.pdf",
+      "url": "pdfs/stiinte-naturii/2015/sesiunea1/stiintele_naturii 2015 sesiunea 1.pdf",
+      "date": ".",
+      "size": "7.02 MB",
+      "category": "sesiunea1",
+      "isPlaceholder": false
+    }
+  ],
   "stiinte-naturii_2015_sesiunea2": [
     {
-      "id": "stiinte-naturii_2015_sesiunea2_2015 MI S II",
-      "title": "2015 MI S II",
-      "description": "Auto-detected PDF: 2015 MI S II.pdf",
-      "url": "pdfs/stiinte-naturii/2015/sesiunea2/2015 MI S II.pdf",
+      "id": "stiinte-naturii_2015_sesiunea2_stiintele naturii 2015 sesiunea II",
+      "title": "stiintele naturii 2015 sesiunea II",
+      "description": "Auto-detected PDF: stiintele naturii 2015 sesiunea II.pdf",
+      "url": "pdfs/stiinte-naturii/2015/sesiunea2/stiintele naturii 2015 sesiunea II.pdf",
       "date": ".",
-      "size": "5.15 MB",
+      "size": "6.38 MB",
       "category": "sesiunea2",
+      "isPlaceholder": false
+    }
+  ],
+  "stiinte-naturii_2015_speciala": [
+    {
+      "id": "stiinte-naturii_2015_speciala_stiintele_naturii 2015 sesiunea_speciala",
+      "title": "stiintele naturii 2015 sesiunea speciala",
+      "description": "Auto-detected PDF: stiintele_naturii 2015 sesiunea_speciala.pdf",
+      "url": "pdfs/stiinte-naturii/2015/speciala/stiintele_naturii 2015 sesiunea_speciala.pdf",
+      "date": ".",
+      "size": "8.30 MB",
+      "category": "speciala",
       "isPlaceholder": false
     }
   ],
@@ -35,6 +71,30 @@ var pdfDatabaseAuto = {
       "isPlaceholder": false
     }
   ],
+  "matematica-informatica_2015_model": [
+    {
+      "id": "matematica-informatica_2015_model_matematica_informatica 2015 model",
+      "title": "matematica informatica 2015 model",
+      "description": "Auto-detected PDF: matematica_informatica 2015 model.pdf",
+      "url": "pdfs/matematica-informatica/2015/model/matematica_informatica 2015 model.pdf",
+      "date": ".",
+      "size": "8.87 MB",
+      "category": "model",
+      "isPlaceholder": false
+    }
+  ],
+  "matematica-informatica_2015_sesiunea1": [
+    {
+      "id": "matematica-informatica_2015_sesiunea1_matematica_informatica 2015 sesiunea 1",
+      "title": "matematica informatica 2015 sesiunea 1",
+      "description": "Auto-detected PDF: matematica_informatica 2015 sesiunea 1.pdf",
+      "url": "pdfs/matematica-informatica/2015/sesiunea1/matematica_informatica 2015 sesiunea 1.pdf",
+      "date": ".",
+      "size": "6.39 MB",
+      "category": "sesiunea1",
+      "isPlaceholder": false
+    }
+  ],
   "matematica-informatica_2015_sesiunea2": [
     {
       "id": "matematica-informatica_2015_sesiunea2_matematica-informatica_2015_sesiunea2",
@@ -44,6 +104,18 @@ var pdfDatabaseAuto = {
       "date": ".",
       "size": "5.15 MB",
       "category": "sesiunea2",
+      "isPlaceholder": false
+    }
+  ],
+  "matematica-informatica_2015_speciala": [
+    {
+      "id": "matematica-informatica_2015_speciala_matematica_informatica 2015 sesiunea_speciala",
+      "title": "matematica informatica 2015 sesiunea speciala",
+      "description": "Auto-detected PDF: matematica_informatica 2015 sesiunea_speciala.pdf",
+      "url": "pdfs/matematica-informatica/2015/speciala/matematica_informatica 2015 sesiunea_speciala.pdf",
+      "date": ".",
+      "size": "9.80 MB",
+      "category": "speciala",
       "isPlaceholder": false
     }
   ]

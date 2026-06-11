@@ -355,6 +355,7 @@ body.theme-transitioning * {
 }
 .d-s1  { background: #6366f1; box-shadow: 0 0 6px rgba(99,102,241,0.4); }
 .d-s2  { background: #8b5cf6; box-shadow: 0 0 6px rgba(139,92,246,0.4); }
+.d-sp  { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.4); }
 .d-sim { background: #f59e0b; box-shadow: 0 0 6px rgba(245,158,11,0.4); }
 .d-mod { background: #10b981; box-shadow: 0 0 6px rgba(16,185,129,0.4); }
 
@@ -411,10 +412,12 @@ body.theme-transitioning * {
 .b-purple { background: #f3e8ff; color: #7e22ce; }
 .b-amber  { background: #fef3c7; color: #92400e; }
 .b-green  { background: #d1fae5; color: #065f46; }
+.b-red    { background: #fee2e2; color: #991b1b; }
 [data-theme="dark"] .b-blue   { background: #1e1b4b; color: #a78bfa; }
 [data-theme="dark"] .b-purple { background: #2e1065; color: #c4b5fd; }
 [data-theme="dark"] .b-amber  { background: #451a03; color: #fcd34d; }
 [data-theme="dark"] .b-green  { background: #022c22; color: #6ee7b7; }
+[data-theme="dark"] .b-red    { background: #4b0b0b; color: #fecaca; }
 
 .sol-title {
   font-family: 'Playfair Display', serif;
@@ -663,12 +666,13 @@ const BIO_TOPICS = [
   { id:'anatomie', name:'Anatomie', desc:'Sisteme biologice umane', icon:'fas fa-heart' },
 ];
 const SESSIONS = [
-  { id:'sesiunea1', name:'Sesiunea I',         desc:'Iunie – sesiunea principală',     dot:'d-s1' },
-  { id:'sesiunea2', name:'Sesiunea a II-a',    desc:'Septembrie – sesiunea de toamnă', dot:'d-s2' },
-  { id:'simulare',  name:'Simulare Națională', desc:'Simulare oficială',               dot:'d-sim' },
-  { id:'model',     name:'Model Oficial MEN',  desc:'Model ministerial',               dot:'d-mod' },
+  { id:'sesiunea1', name:'Sesiunea I',         desc:'Iunie – sesiunea principală',            dot:'d-s1' },
+  { id:'sesiunea2', name:'Sesiunea a II-a',    desc:'Septembrie – sesiunea de toamnă',        dot:'d-s2' },
+  { id:'speciala',  name:'Sesiunea Specială',   desc:'Sesiunea specială pentru situații deosebite', dot:'d-sp' },
+  { id:'simulare',  name:'Simulare Națională',  desc:'Simulare oficială',                      dot:'d-sim' },
+  { id:'model',     name:'Model Oficial MEN',   desc:'Model ministerial',                      dot:'d-mod' },
 ];
-const BADGE_CLASS = { sesiunea1:'b-blue', sesiunea2:'b-purple', simulare:'b-amber', model:'b-green' };
+const BADGE_CLASS = { sesiunea1:'b-blue', sesiunea2:'b-purple', speciala:'b-red', simulare:'b-amber', model:'b-green' };
 
 /* ════════════════════════════════════════
    PDF DATABASE
@@ -688,7 +692,7 @@ const BADGE_CLASS = { sesiunea1:'b-blue', sesiunea2:'b-purple', simulare:'b-ambe
    }]
 ════════════════════════════════════════ */
 function mkPlaceholder(profile, year, session) {
-  const n = {sesiunea1:'Sesiunea I',sesiunea2:'Sesiunea II',simulare:'Simulare',model:'Model Oficial'};
+  const n = {sesiunea1:'Sesiunea I', sesiunea2:'Sesiunea II', speciala:'Sesiunea Specială', simulare:'Simulare', model:'Model Oficial'};
   return { id:`${profile}_${year}_${session}_ph`, title:`${n[session]} ${year}`,
            description:'Rezolvările vor fi disponibile în curând.',
            url:'#', date:'În curând', size:'—', isPlaceholder:true };
@@ -697,7 +701,7 @@ function mkPlaceholder(profile, year, session) {
 const pdfDB = {};
 ['stiinte-naturii','matematica-informatica','tehnologic','pedagogic','biologie_anatomie'].forEach(p => {
   YEARS.forEach(y => {
-    ['sesiunea1','sesiunea2','simulare','model'].forEach(s => {
+    ['sesiunea1','sesiunea2','speciala','simulare','model'].forEach(s => {
       pdfDB[`${p}_${y}_${s}`] = [mkPlaceholder(p, y, s)];
     });
   });
