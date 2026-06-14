@@ -47,6 +47,18 @@ var pdfDatabaseAuto = {
       "isPlaceholder": false
     }
   ],
+  "stiinte-naturii_2015_simulare": [
+    {
+      "id": "stiinte-naturii_2015_simulare_stiintele_naturii 2015 simulare",
+      "title": "stiintele naturii 2015 simulare",
+      "description": "Auto-detected PDF: stiintele_naturii 2015 simulare.pdf",
+      "url": "pdfs/stiinte-naturii/2015/simulare/stiintele_naturii 2015 simulare.pdf",
+      "date": ".",
+      "size": "7.44 MB",
+      "category": "simulare",
+      "isPlaceholder": false
+    }
+  ],
   "stiinte-naturii_2015_speciala": [
     {
       "id": "stiinte-naturii_2015_speciala_stiintele_naturii 2015 sesiunea_speciala",
@@ -104,6 +116,18 @@ var pdfDatabaseAuto = {
       "date": ".",
       "size": "5.15 MB",
       "category": "sesiunea2",
+      "isPlaceholder": false
+    }
+  ],
+  "matematica-informatica_2015_simulare": [
+    {
+      "id": "matematica-informatica_2015_simulare_matematica_informatica 2015 simulare",
+      "title": "matematica informatica 2015 simulare",
+      "description": "Auto-detected PDF: matematica_informatica 2015 simulare.pdf",
+      "url": "pdfs/matematica-informatica/2015/simulare/matematica_informatica 2015 simulare.pdf",
+      "date": ".",
+      "size": "11.24 MB",
+      "category": "simulare",
       "isPlaceholder": false
     }
   ],
