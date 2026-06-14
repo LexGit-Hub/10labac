@@ -998,17 +998,16 @@ function initTheme() {
    BOOT
 ════════════════════════════════════════ */
 initTheme();
-mergePDFDatabase();
-const initialState = window.history.state || parseStateFromHash();
-setState(initialState, true);
 </script>
 
 <!-- Load your PDF databases — keep these exactly as before -->
 <script src="pdf-database.auto.js"></script>
 <script src="pdf-database.js"></script>
 <script>
-  // Re-merge after external files load
+  // Initialize after all external files are loaded
   mergePDFDatabase();
+  const initialState = window.history.state || parseStateFromHash();
+  setState(initialState, true);
 </script>
 
 <div class="creator-credit">a Mînzat Alexandru project</div>
